@@ -39,7 +39,10 @@ if(isset($_POST['update_hospital_info'])){
             $query -> bindParam('_id', $id);
             // $query -> bindParam('image', $p_image);
             $query -> execute();
-            echo "<script>alert('product added succesfully')</script>";
+            echo "<script>alert('hospital updated succesfully')</script>";
+            header('Location: adminPanel.php');
+            exit;
+    
         }
      
     // }else{
@@ -86,36 +89,44 @@ if(isset($_POST['update_hospital_info'])){
 //                                                                            |
 //                                                                            |
 // ---------------------------------------------------------------------------|
-    if(isset($_POST['insertCategory'])){
-        $p_name = $_POST['categoryName'];
-        $p_image = $_FILES['categoryImage']['name'];
-        $p_image_size = $_FILES['categoryImage']['size'];
-        $p_image_tmp_name = $_FILES['categoryImage']['tmp_name'];
-        $p_image_ext = pathinfo($p_image, PATHINFO_EXTENSION);
-        $destination = "images/".$p_image;
-        if($p_image_size <= 48000000){
-        if($p_image_ext == 'jpg' || $p_image_ext == "png" || $p_image_ext== 'jpeg' || $p_image_ext== 'webp'){
-            if(move_uploaded_file($p_image_tmp_name,$destination)){
-                $query= $pdo -> prepare("INSERT into category(category_name,category_image) values(:p_name,:p_image)");
-                $query -> bindParam('p_name', $p_name);
-                $query -> bindParam('p_image', $p_image);
+    if(isset($_POST['insert-hospital-btn'])){
+        $hospital_name = $_POST['insert-hospital-name'];
+        $hospital_email = $_POST['insert-hospital-email'];
+        $hospital_location = $_POST['insert-hospital-location'];
+        // $p_image = $_FILES['categoryImage']['name'];
+        // $p_image_size = $_FILES['categoryImage']['size'];
+        // $p_image_tmp_name = $_FILES['categoryImage']['tmp_name'];
+        // $p_image_ext = pathinfo($p_image, PATHINFO_EXTENSION);
+        // $destination = "images/".$p_image;
+        // if($p_image_size <= 48000000){
+        // if($p_image_ext == 'jpg' || $p_image_ext == "png" || $p_image_ext== 'jpeg' || $p_image_ext== 'webp'){
+        //     if(move_uploaded_file($p_image_tmp_name,$destination)){
+                $query= $pdo -> prepare("INSERT into hospital_login(hospitalName,hospitalEmail,hospitalLocation) values(:hospital_name,:hospital_email,:hospital_location)");
+                $query -> bindParam('hospital_name', $hospital_name);
+                $query -> bindParam('hospital_email', $hospital_email);
+                $query -> bindParam('hospital_location', $hospital_location);
+                // $query -> bindParam('p_image', $p_image);
                 $query -> execute();
-                echo "<script>alert('product added succesfully')</script>";
+               
+                echo "<script>alert('hospital added succesfully')</script>";
+                header('Location: adminPanel.php');
+                exit;
+        
             }
         
-        }else{
-            echo "<script>alert('not valid extension')
-            location.assign('category.php')
-            </script>";
-        }
+        // }else{
+        //     echo "<script>alert('not valid extension')
+        //     location.assign('category.php')
+        //     </script>";
+        // }
         
-        }else{
-            echo "file size is greater";
-        }
+        // }else{
+        //     echo "file size is greater";
+        // }
         
         
         
-        }
+        // }
 // ---------------------------------------------------------------------------|
 //                                                                            |                 
 //                                                                            |
@@ -131,3 +142,15 @@ if(isset($_POST['update_hospital_info'])){
 |   php tag end for queries to update delete and add  hospital information  by admin             |
 |   [end]..                                                                                      |  
 ------------------------------------------------------------------------------------------------->
+<?php
+if (isset($_POST['delete_hospital_info'])) {
+    $hospital_id = $_POST['hospital_id_delete'];
+    $query= $pdo -> prepare(" DELETE FROM hospital_login WHERE hospitalID = :id;");
+    $query->bindParam('id', $hospital_id);
+    $query -> execute();
+    echo "<script>alert('hospital deleted')</script>";
+    
+
+}
+
+?>
