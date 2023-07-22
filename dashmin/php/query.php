@@ -135,22 +135,42 @@ if(isset($_POST['update_hospital_info'])){
 //                                                                            |
 //                                                                            |
 // ---------------------------------------------------------------------------|
+
+
+
+// ---------------------------------------------------------------------------|
+//                                                                            |                 
+//                                                                            |
+// query for  delete hospital                                                 |
+//               [start]                                                      |     
+//                                                                            |
+//                                                                            |
+// ---------------------------------------------------------------------------|
     
 
-?>
-<!-----------------------------------------------------------------------------------------------
-|   php tag end for queries to update delete and add  hospital information  by admin             |
-|   [end]..                                                                                      |  
-------------------------------------------------------------------------------------------------->
-<?php
 if (isset($_POST['delete_hospital_info'])) {
     $hospital_id = $_POST['hospital_id_delete'];
     $query= $pdo -> prepare(" DELETE FROM hospital_login WHERE hospitalID = :id;");
     $query->bindParam('id', $hospital_id);
     $query -> execute();
     echo "<script>alert('hospital deleted')</script>";
+    header('Location: adminPanel.php');
+    exit;
     
+};
 
-}
+
+// ---------------------------------------------------------------------------|
+//                                                                            |                 
+//                                                                            |
+// query for  delete hospital                                                 |
+//               [end]                                                        |     
+//                                                                            |
+//                                                                            |
+// ---------------------------------------------------------------------------|
 
 ?>
+<!-----------------------------------------------------------------------------------------------
+|   php tag end for queries to update delete and add  hospital information  by admin             |
+|   [end]..                                                                                      |  
+------------------------------------------------------------------------------------------------->

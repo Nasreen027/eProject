@@ -1,3 +1,6 @@
+<?php
+include('header.php')
+?>
 <div class="container pt-4">
             <div class="bg-light rounded p-4">
             <div class="row">
@@ -242,3 +245,8 @@
     </div>
 </div>
 <!-- model for insert button end -->
+
+          
+<?php
+include('footer.php')
+?>
