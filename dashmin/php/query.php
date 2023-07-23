@@ -40,7 +40,7 @@ if(isset($_POST['update_hospital_info'])){
             // $query -> bindParam('image', $p_image);
             $query -> execute();
             echo "<script>alert('hospital updated succesfully')</script>";
-            header('Location: adminPanel.php');
+            header('Location: hospitalData.php');
             exit;
     
         }
@@ -109,7 +109,7 @@ if(isset($_POST['update_hospital_info'])){
                 $query -> execute();
                
                 echo "<script>alert('hospital added succesfully')</script>";
-                header('Location: adminPanel.php');
+                header('Location: hospitalData.php');
                 exit;
         
             }
@@ -154,7 +154,7 @@ if (isset($_POST['delete_hospital_info'])) {
     $query->bindParam('id', $hospital_id);
     $query -> execute();
     echo "<script>alert('hospital deleted')</script>";
-    header('Location: adminPanel.php');
+    header('Location: hospitalData.php');
     exit;
     
 };

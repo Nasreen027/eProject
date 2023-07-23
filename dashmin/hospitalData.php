@@ -24,6 +24,7 @@ include('header.php')
                                             <th scope="col">Hospital Name</th>
                                             <th scope="col">Hospital Email</th>
                                             <th scope="col">Hospital Address</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col"> </th>
                                           
                                         </tr>
@@ -41,6 +42,7 @@ include('header.php')
                                             <td><?php echo $row['hospitalName'] ?></td>
                                             <td><?php echo $row['hospitalEmail'] ?></td>
                                             <td><?php echo $row['hospitalLocation'] ?></td>
+                                            <td><?php echo $row['hospitalStatus'] ?></td>
                                             <td class="">
                                             <button class="btn btn-white edit-btn " data-bs-toggle="modal"
                                                 data-bs-target="#update-hospital-modal<?php echo $row['hospitalID']  ?>">

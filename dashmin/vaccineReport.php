@@ -8,7 +8,7 @@ include('header.php')
                 <div class="bg-white rounded h-100 ">
                     <div class="d-flex bg-light justify-content-between">
 
-                        <h4> Details of child</h4>
+                        <h4>Vaccine Details  </h4>
 
 
 
@@ -20,53 +20,40 @@ include('header.php')
                                 <tr>
                                     <th scope="col">#</th>
 
-                                    <td>Child Name</td>
-                                    <td>Gender</td>
-                                    <td>Age</td>
-                                    <td>Hospital Booked </td>
-                                    <td>Vaccine </td>
-                                    <td>Medical Conditions </td>
-                                    <td>Parent Name </td>
-                                    <td>Date of Vaccination </td>
+                                    <td>Vaccine Name</td>
+                                    <td>Vaccine Stock</td>
+                                    <td>Vaccine Date</td>
+                                    <td>Hospital Name </td>
+                                    
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * from children_details JOIN parent_login on children_details.childID = parent_login.parentID join  vaccine_details on children_details.childID = vaccine_details.vaccineID  join  hospital_login on children_details.childID =  hospital_login.hospitalID ");
+                        $query = $pdo->query("SELECT * FROM vaccine_details JOIN  hospital_login on  vaccine_details.vaccineID = hospital_login.hospitalID ");
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                
                         foreach($result as $row){
                         ?>
                                 <tr>
                                     <th scope="row">
-                                        <?php echo $row['childID'] ?>
+                                        <?php echo $row['vaccineID'] ?>
                                     </th>
 
-                                    <td>
-                                        <?php echo $row['childName'] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['childGender'] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['childAge'] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['hospitalName'] ?>
-                                    </td>
                                     <td>
                                         <?php echo $row['vaccineName'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['medicalConditions'] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['parentName'] ?>
+                                        <?php echo $row['vaccineStock'] ?>
                                     </td>
                                     <td>
                                         <?php echo $row['vaccineDate'] ?>
                                     </td>
+                                    <td>
+                                        <?php echo $row['hospitalName'] ?>
+                                    </td>
+                                    
+                                   
 
                                 </tr>
 

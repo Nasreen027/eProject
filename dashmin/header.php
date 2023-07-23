@@ -73,8 +73,8 @@ h4{
                    
                     <a href="hospitalData.php" class="nav-item nav-link"><i class="fa fa-hospital me-2"></i>Hospital Data</a>
                     <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine Report</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Children</a>
+                    <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
+                    <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child Details</a>
                   
                 </div>
             </nav>
@@ -102,36 +102,43 @@ h4{
                             <span class="d-none d-lg-inline-flex">Message</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                           
+                       <?php
+                             $query = $pdo->query("SELECT * from parent_login where parentStatus = 'pending' ");
+                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                             foreach($result as $row){
+                       ?>
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0"> <?php echo $row['parentName']?> send you a message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>
                             </a>
                             <hr class="dropdown-divider">
+<?php
+                             }
+?>
+                       <?php
+                             $query = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending' ");
+                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                             foreach($result as $row){
+                       ?>
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <h6 class="fw-normal mb-0"> <?php echo $row['hospitalName']?> send you a message</h6>
                                         <small>15 minutes ago</small>
                                     </div>
                                 </div>
                             </a>
                             <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
+<?php
+                             }
+?>
                             <a href="#" class="dropdown-item text-center">See all message</a>
                         </div>
                     </div>
@@ -172,5 +179,5 @@ h4{
                     </div>
                 </div>
             </nav>
+            
             <!-- Navbar End -->
-
