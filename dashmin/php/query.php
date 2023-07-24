@@ -174,3 +174,23 @@ if (isset($_POST['delete_hospital_info'])) {
 |   php tag end for queries to update delete and add  hospital information  by admin             |
 |   [end]..                                                                                      |  
 ------------------------------------------------------------------------------------------------->
+<?php
+
+if (isset($_POST['approve'])) {
+    $id = $_POST['statusID'];
+    // $status = 'approved';
+    $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'approved' WHERE parentID = :_id");
+    $query->bindParam('_id', $id);
+    // $query->bindParam('status', $status);
+    $query->execute();
+}
+
+if (isset($_POST['reject'])) {
+    $id = $_POST['statusID'];
+    // $status = 'approved';
+    $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'rejected' WHERE parentID = :_id");
+    $query->bindParam('_id', $id);
+    // $query->bindParam('status', $status);
+    $query->execute();
+}
+?>

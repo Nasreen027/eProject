@@ -43,13 +43,19 @@ include('header.php')
                                     <td>
                                         <?php echo $row['parentEmail'] ?>
                                     </td>
-                                    <td>
-                                    <select class="form-select" onchange="updateParentStatus(this.value, <?php echo $row['parentID']; ?>)">
-                        <option value="0" <?php if ($row['parentStatus'] == 0) echo 'selected'; ?>>Pending</option>
-                        <option value="1" <?php if ($row['parentStatus'] == 1) echo 'selected'; ?>>Approved</option>
-                        <option value="2" <?php if ($row['parentStatus'] == 2) echo 'selected'; ?>>Rejected</option>
-                    </select>
-                                    </td>
+                                    <td class="d-flex">
+      <?php echo $row['parentStatus'] ?>
+      <div class="mx-auto">
+        <i class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"></i>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <form action="" method="post">
+            <input type="hidden" name="statusID" value="<?php echo $row['parentID'] ?>">
+            <button class="dropdown-item" name="approve" type="submit">Approve</button>
+            <button class="dropdown-item" name="reject" type="submit">Reject</button>
+          </form>
+        </div>
+      </div>
+    </td>
                                    
                                    
 
