@@ -32,7 +32,7 @@ include('header.php')
                
                         foreach($result as $row){
                         ?>
-                                <tr>
+                                <tr class="tr-row">
                                     <th scope="row">
                                         <?php echo $row['parentID'] ?>
                                     </th>
@@ -69,7 +69,7 @@ include('header.php')
         </div>
     </div>
 </div>
-
+<script src="js/script.js"></script>
 <?php
 include('footer.php')
 ?>

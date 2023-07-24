@@ -36,7 +36,7 @@ include('header.php')
                
                         foreach($result as $row){
                         ?>
-                                        <tr>
+                                        <tr class="tr-row">
                                             <th scope="row">  <?php echo $row['hospitalID'] ?></th>
                                             
                                             <td><?php echo $row['hospitalName'] ?></td>
@@ -248,7 +248,8 @@ include('header.php')
 </div>
 <!-- model for insert button end -->
 
-          
+<script src="js/script.js"></script>
+
 <?php
 include('footer.php')
 ?>

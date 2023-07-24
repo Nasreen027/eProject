@@ -71,7 +71,7 @@ h4{
                 <div class="navbar-nav w-100">
             
                    
-                    <a href="hospitalData.php" class="nav-item nav-link"><i class="fa fa-hospital me-2"></i>Hospital Data</a>
+                    <a href="index.php" class="nav-item nav-link"><i class="fa fa-hospital me-2"></i>Hospital Data</a>
                     <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine Report</a>
                     <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
                     <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child Details</a>
@@ -92,8 +92,8 @@ h4{
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
+                <form class=" d-none d-md-flex ms-4">
+                    <input id="taskFilter" name="search-query" class="taskFilter form-control border-0" type="search" placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
