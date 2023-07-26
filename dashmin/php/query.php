@@ -152,7 +152,7 @@ if (isset($_POST['delete_hospital_info'])) {
     $hospital_id = $_POST['hospital_id_delete'];
     $query= $pdo -> prepare(" DELETE FROM hospital_login WHERE hospitalID = :id;");
     $query->bindParam('id', $hospital_id);
-    $query -> execute();
+    $query->execute();
     echo "<script>alert('hospital deleted')</script>";
     header('Location: hospitalData.php');
     exit;
@@ -175,7 +175,15 @@ if (isset($_POST['delete_hospital_info'])) {
 |   [end]..                                                                                      |  
 ------------------------------------------------------------------------------------------------->
 
+
+
+<!-----------------------------------------------------------------------------------------------
+|   query for status column of parent table      (Registeration Approval)                        |
+|   [start]..                                                                                    |  
+------------------------------------------------------------------------------------------------->
+
 <?php
+// set parent status = approve in database table when it is approved by admin  [start]//
 
 if (isset($_POST['parentApprove'])) {
     $id = $_POST['statusID'];
@@ -184,14 +192,32 @@ if (isset($_POST['parentApprove'])) {
     $query->execute();
 }
 
+//     [end]     //
+
+// set parent status = reject in database table when it is rejected by admin  [start]//
+
 if (isset($_POST['parentReject'])) {
     $id = $_POST['statusID'];
     $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'rejected' WHERE parentID = :_id");
     $query->bindParam('_id', $id);
     $query->execute();
 }
+
+//     [end]     //
 ?>
+<!-----------------------------------------------------------------------------------------------
+|   query for status column of parent table                                                      |
+|   [end]..                                                                                      |  
+------------------------------------------------------------------------------------------------->
+
+
+<!-----------------------------------------------------------------------------------------------
+|   query for status column of hospital table      (Registeration Approval)                      |
+|   [start]..                                                                                    |  
+------------------------------------------------------------------------------------------------->
+
 <?php
+// set hospital status = approve in database table when it is approved by admin  [start]//
 
 if (isset($_POST['hospitalApprove'])) {
     $id = $_POST['statusID'];
@@ -200,10 +226,56 @@ if (isset($_POST['hospitalApprove'])) {
     $query->execute();
 }
 
+//     [end]     //
+
+// set hospital status = reject in database table when it is rejected by admin  [start]//
+
 if (isset($_POST['hospitalReject'])) {
     $id = $_POST['statusID'];
     $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'rejected' WHERE hospitalID = :_id");
     $query->bindParam('_id', $id);
     $query->execute();
+}
+//     [end]     //
+
+?>
+<!---------------------------------------------------------------------------------------------
+|   query for status column of hospital table                                                  |
+|   [end]..                                                                                    |  
+----------------------------------------------------------------------------------------------->
+<?php
+if (isset($_POST['notification-parent-approve-btn'])) {
+    $id = $_POST['notification-parent-id'];
+    $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'approved' WHERE parentID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
+}
+if (isset($_POST['notification-parent-reject-btn'])) {
+    $id = $_POST['notification-parent-id'];
+    $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'rejected' WHERE parentID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
+}
+?>
+<?php
+if (isset($_POST['notification-hospital-approve-btn'])) {
+    $id = $_POST['notification-hospital-id'];
+    $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'approved' WHERE hospitalID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
+}
+if (isset($_POST['notification-hospital-reject-btn'])) {
+    $id = $_POST['notification-hospital-id'];
+    $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'rejected' WHERE hospitalID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
 }
 ?>

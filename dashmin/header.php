@@ -102,22 +102,45 @@ include("php/query.php");
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        <?php 
+                         $queryParentData = $pdo->query("SELECT * from parent_login where parentStatus = 'pending' LIMIT 2");
+                         $resultParentData = $queryParentData->fetchAll(PDO::FETCH_ASSOC);
+                         $queryHospitalData = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'  LIMIT 2");
+                         $resultHospitalData = $queryHospitalData->fetchAll(PDO::FETCH_ASSOC);
+                         if(count($resultParentData) > 0 && count($resultHospitalData) > 0 ){
+                          ?>
+                          
+                          <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2 position-relative">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute top-0 start-0 p-1"></div>
+                            </i>
+                            <span class="d-none d-lg-inline-flex">notifications</span>
+                           
                         </a>
+                        <?php 
+                    }else{
+                        
+                        ?>
+                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2">
+                        </i>
+                        <span class="d-none d-lg-inline-flex">notifications</span>
+                       
+                    </a>
+                     <?php
+                     
+                    }?>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
 
                             <?php
-                             $query = $pdo->query("SELECT * from parent_login where parentStatus = 'pending' LIMIT 2");
-                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                            
                     
-                             foreach($result as $row){
+                             foreach($resultParentData as $row1){
                        ?>
-                            <a href="parentRequest.php" class="dropdown-item">
+                            <a href="parentRequest.php" class="dropdown-item link-secondary">
 
                                         <h6 class="fw-normal mb-0">
-                                            <?php echo ucfirst($row['parentName'])?> has requested for registeration
+                                            <?php echo ucfirst($row1['parentName'])?> has requested for registeration
                                         </h6>
                             </a>
                             <hr class="dropdown-divider">
@@ -125,16 +148,15 @@ include("php/query.php");
                              }
 ?>
                             <?php
-                             $query = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'  LIMIT 2");
-                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                          
                     
-                             foreach($result as $row){
+                             foreach($resultHospitalData as $row2){
                        ?>
-                            <a href="hospitalData.php" class="dropdown-item">
+                            <a href="hospitalData.php" class="dropdown-item link-secondary">
 
 
                                 <h6 class="fw-normal mb-0">
-                                    <?php echo ucfirst($row['hospitalName'])?> hospital has requested for registeration
+                                    <?php echo ucfirst($row2['hospitalName'])?> hospital has requested for registeration
                                 </h6>
 
 
@@ -143,8 +165,17 @@ include("php/query.php");
                             <?php
                              }
 ?>
-                            <a href="requestPage.php" class="dropdown-item text-center">See all notifications</a>
-
+                            <?php
+    if ((empty($resultHospitalData) && empty(resultParentData)) ) {
+        ?>
+        <a class="dropdown-item text-center link-secondary">No notification</a>
+    <?php
+    } else {
+        ?>
+        <a href="requestPage.php" class="dropdown-item text-center link-secondary">See all notifications</a>
+    <?php
+    }
+    ?>
                         </div>
                     </div>
 

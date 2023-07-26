@@ -26,9 +26,53 @@ include('header.php')
                         ?>
                                 <tr class="tr-row">
                                    
-                                    <td>
+                                    <td class="d-flex justify-content-around">
+                                        <span class="flex-grow-1">
+                                            <a href="parentRequest.php" class="link-secondary">
+
                                         <?php echo ucfirst($row['parentName'])?> has requested for registeration 
+
+                                            </a>
+                                        </span>
+                                       <form method="post">
+                                        <input type="hidden" name="notification-parent-id" value="<?php echo $row['parentID']?>">
+                                       <button class="approve-btn btn btn-secondary" name='notification-parent-approve-btn' onclick="animateRow(this)">Approve</button>
+                                       <button class="reject-btn btn btn-light" name='notification-parent-reject-btn' onclick="rejectRow(this)">Reject</button>
+                                       </form>
+                                    
                                     </td>
+    
+
+                                </tr>
+
+
+                                <?php
+                        };
+
+                                       ?>
+                                <?php
+                        $query = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'");
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+               
+                        foreach($result as $row){
+                        ?>
+                                <tr class="tr-row">
+                                   
+                                    <td class="d-flex justify-content-around">
+                                        <span class="flex-grow-1">
+                                            <a href="hospitalData.php" class="link-secondary">
+                                        <?php echo ucfirst($row['hospitalName'])?> hospital has requested for registeration 
+                                        </a>
+                                        </span>
+                                       <form method="post">
+                                        <input type="hidden" name="notification-hospital-id" value="<?php echo $row['hospitalID']?>">
+                                       <button class="approve-btn btn btn-secondary" name='notification-hospital-approve-btn' onclick="approveRow(this)">Approve</button>
+                                    
+                                    
+                                        <button class="reject-btn btn btn-light" name='notification-hospital-reject-btn' onclick="rejectRow(this)">Reject</button>
+                                        </form>
+                                    </td>
+    
 
                                 </tr>
 
