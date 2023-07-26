@@ -50,8 +50,8 @@ include('header.php')
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <form action="" method="post">
             <input type="hidden" name="statusID" value="<?php echo $row['parentID'] ?>">
-            <button class="dropdown-item" name="approve" type="submit">Approve</button>
-            <button class="dropdown-item" name="reject" type="submit">Reject</button>
+            <button class="dropdown-item" name="parentApprove">Approve</button>
+            <button class="dropdown-item" name="parentReject" >Reject</button>
           </form>
         </div>
       </div>

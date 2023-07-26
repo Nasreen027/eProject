@@ -42,7 +42,22 @@ include('header.php')
                                             <td><?php echo $row['hospitalName'] ?></td>
                                             <td><?php echo $row['hospitalEmail'] ?></td>
                                             <td><?php echo $row['hospitalLocation'] ?></td>
-                                            <td><?php echo $row['hospitalStatus'] ?></td>
+                                            <td >
+                                                <div class="d-flex">
+      <?php echo $row['hospitalStatus'] ?>
+      <div class="mx-auto">
+        <i class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"></i>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <form action="" method="post">
+            <input type="hidden" name="statusID" value="<?php echo $row['hospitalID'] ?>">
+            <button class="dropdown-item" name="hospitalApprove">Approve</button>
+            <button class="dropdown-item" name="hospitalReject" >Reject</button>
+          </form>
+        </div>
+
+      </div>
+      </div>
+    </td>
                                             <td class="">
                                             <button class="btn btn-white edit-btn " data-bs-toggle="modal"
                                                 data-bs-target="#update-hospital-modal<?php echo $row['hospitalID']  ?>">

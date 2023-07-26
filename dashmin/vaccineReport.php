@@ -30,7 +30,7 @@ include('header.php')
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * FROM vaccine_details JOIN  hospital_login on  vaccine_details.vaccineID = hospital_login.hospitalID ");
+                        $query = $pdo->query("SELECT * FROM vaccine_details JOIN  hospital_login on  vaccine_details.hospitalID = hospital_login.hospitalID ");
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                
                         foreach($result as $row){

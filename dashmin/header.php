@@ -20,7 +20,7 @@ include("php/query.php");
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -36,15 +36,16 @@ include("php/query.php");
     <link href="css/style.css" rel="stylesheet">
 </head>
 <style>
-h4{
-    color: #6C7293;
-}
-
+    h4 {
+        color: #6C7293;
+    }
 </style>
+
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -69,13 +70,16 @@ h4{
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-            
-                   
-                    <a href="index.php" class="nav-item nav-link"><i class="fa fa-hospital me-2"></i>Hospital Data</a>
-                    <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine Report</a>
+
+
+                    <a href="hospitalData.php" class="nav-item nav-link "><i class="fa fa-hospital me-2"></i>Hospital
+                        Data</a>
+                    <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine
+                        Report</a>
                     <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
-                    <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child Details</a>
-                  
+                    <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child
+                        Details</a>
+
                 </div>
             </nav>
         </div>
@@ -93,82 +97,61 @@ h4{
                     <i class="fa fa-bars"></i>
                 </a>
                 <form class=" d-none d-md-flex ms-4">
-                    <input id="taskFilter" name="search-query" class="taskFilter form-control border-0" type="search" placeholder="Search">
+                    <input id="taskFilter" name="search-query" class="taskFilter form-control border-0" type="search"
+                        placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                           
-                       <?php
-                             $query = $pdo->query("SELECT * from parent_login where parentStatus = 'pending' ");
-                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                    
-                             foreach($result as $row){
-                       ?>
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0"> <?php echo $row['parentName']?> send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-<?php
-                             }
-?>
-                       <?php
-                             $query = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending' ");
-                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                    
-                             foreach($result as $row){
-                       ?>
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0"> <?php echo $row['hospitalName']?> send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-<?php
-                             }
-?>
-                            <a href="#" class="dropdown-item text-center">See all message</a>
-                        </div>
-                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
                             <span class="d-none d-lg-inline-flex">Notificatin</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
+
+                            <?php
+                             $query = $pdo->query("SELECT * from parent_login where parentStatus = 'pending' LIMIT 2");
+                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                             foreach($result as $row){
+                       ?>
+                            <a href="parentRequest.php" class="dropdown-item">
+
+                                        <h6 class="fw-normal mb-0">
+                                            <?php echo ucfirst($row['parentName'])?> has requested for registeration
+                                        </h6>
                             </a>
                             <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
+                            <?php
+                             }
+?>
+                            <?php
+                             $query = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'  LIMIT 2");
+                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                             foreach($result as $row){
+                       ?>
+                            <a href="hospitalData.php" class="dropdown-item">
+
+
+                                <h6 class="fw-normal mb-0">
+                                    <?php echo ucfirst($row['hospitalName'])?> hospital has requested for registeration
+                                </h6>
+
+
                             </a>
                             <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                            <?php
+                             }
+?>
+                            <a href="requestPage.php" class="dropdown-item text-center">See all notifications</a>
+
                         </div>
                     </div>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt=""
+                                style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
@@ -179,5 +162,5 @@ h4{
                     </div>
                 </div>
             </nav>
-            
+
             <!-- Navbar End -->

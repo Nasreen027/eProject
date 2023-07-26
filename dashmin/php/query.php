@@ -174,23 +174,36 @@ if (isset($_POST['delete_hospital_info'])) {
 |   php tag end for queries to update delete and add  hospital information  by admin             |
 |   [end]..                                                                                      |  
 ------------------------------------------------------------------------------------------------->
+
 <?php
 
-if (isset($_POST['approve'])) {
+if (isset($_POST['parentApprove'])) {
     $id = $_POST['statusID'];
-    // $status = 'approved';
     $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'approved' WHERE parentID = :_id");
     $query->bindParam('_id', $id);
-    // $query->bindParam('status', $status);
     $query->execute();
 }
 
-if (isset($_POST['reject'])) {
+if (isset($_POST['parentReject'])) {
     $id = $_POST['statusID'];
-    // $status = 'approved';
     $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'rejected' WHERE parentID = :_id");
     $query->bindParam('_id', $id);
-    // $query->bindParam('status', $status);
+    $query->execute();
+}
+?>
+<?php
+
+if (isset($_POST['hospitalApprove'])) {
+    $id = $_POST['statusID'];
+    $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'approved' WHERE hospitalID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+}
+
+if (isset($_POST['hospitalReject'])) {
+    $id = $_POST['statusID'];
+    $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'rejected' WHERE hospitalID = :_id");
+    $query->bindParam('_id', $id);
     $query->execute();
 }
 ?>

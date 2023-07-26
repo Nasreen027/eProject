@@ -33,7 +33,7 @@ include('header.php')
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * from children_details JOIN parent_login on children_details.childID = parent_login.parentID join  vaccine_details on children_details.childID = vaccine_details.vaccineID  join  hospital_login on children_details.childID =  hospital_login.hospitalID ");
+                        $query = $pdo->query("SELECT * from children_details INNER JOIN parent_login on children_details.parentID = parent_login.parentID INNER JOIN  vaccine_details on children_details.vaccineID = vaccine_details.vaccineID INNER JOIN  hospital_login on children_details.hospitalID =  hospital_login.hospitalID ");
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                
                         foreach($result as $row){
@@ -65,7 +65,7 @@ include('header.php')
                                         <?php echo $row['parentName'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['vaccineDate'] ?>
+                                        <?php echo $row['vaccinationDate'] ?>
                                     </td>
 
                                 </tr>
