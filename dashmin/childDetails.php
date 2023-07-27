@@ -10,9 +10,9 @@ include('header.php')
 
                         <h4> Details of child</h4>
 
-
-
-
+<form method="post" >
+        <button class="btn bg-white text-black mb-2" name ="sort-by-vaccination-date">Sort by vaccination date</button>
+        </form>
                     </div>
                     <div class="table-responsive bg- ">
                         <table class="table">
@@ -33,9 +33,30 @@ include('header.php')
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * from children_details INNER JOIN parent_login on children_details.parentID = parent_login.parentID INNER JOIN  vaccine_details on children_details.vaccineID = vaccine_details.vaccineID INNER JOIN  hospital_login on children_details.hospitalID =  hospital_login.hospitalID ");
-                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-               
+                     function getSortedData($pdo)
+{
+    $query = $pdo->query("SELECT * FROM children_details 
+                          INNER JOIN parent_login ON children_details.parentID = parent_login.parentID 
+                          INNER JOIN vaccine_details ON children_details.vaccineID = vaccine_details.vaccineID 
+                          INNER JOIN hospital_login ON children_details.hospitalID = hospital_login.hospitalID 
+                          ORDER BY vaccinationDate ASC");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+// Check if the "Sort by vaccination date" button is clicked
+if (isset($_POST['sort-by-vaccination-date'])) {
+    $result = getSortedData($pdo);
+} else {
+    // By default, get data without sorting
+    $query = $pdo->query("SELECT *
+    FROM children_details
+    INNER JOIN parent_login ON children_details.parentID = parent_login.parentID
+    INNER JOIN vaccine_details ON children_details.vaccineID = vaccine_details.vaccineID
+    INNER JOIN hospital_login ON children_details.hospitalID = hospital_login.hospitalID
+    ORDER BY children_details.childID ASC;");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+}
                         foreach($result as $row){
                         ?>
                                 <tr class="tr-row">

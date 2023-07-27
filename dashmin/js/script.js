@@ -15,8 +15,7 @@ listItem.forEach(function (singleLi){
 // console.log(singleLiText);
 if(singleLiText.indexOf(filterValue) === -1){
        singleLi.style.display = "none";
-}
-else{
+}else{
        singleLi.style.display = "";
 }
    

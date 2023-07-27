@@ -76,9 +76,10 @@ include("php/query.php");
                         Data</a>
                     <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine
                         Report</a>
-                    <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
-                    <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child
+                        <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
+                        <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child
                         Details</a>
+                        <a href="requestPage.php" class="nav-item nav-link"><i class="fa fa-bell me-2"></i>Notifications</a>
 
                 </div>
             </nav>
@@ -107,26 +108,27 @@ include("php/query.php");
                          $resultParentData = $queryParentData->fetchAll(PDO::FETCH_ASSOC);
                          $queryHospitalData = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'  LIMIT 2");
                          $resultHospitalData = $queryHospitalData->fetchAll(PDO::FETCH_ASSOC);
-                         if(count($resultParentData) > 0 && count($resultHospitalData) > 0 ){
+                         if(empty($resultParentData) && empty($resultHospitalData) ){
                           ?>
-                          
-                          <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2 position-relative">
-                            <div class="bg-success rounded-circle border border-2 border-white position-absolute top-0 start-0 p-1"></div>
-                            </i>
-                            <span class="d-none d-lg-inline-flex">notifications</span>
-                           
-                        </a>
+                           <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
+                        <i class="fa fa-bell me-lg-2">
+                        </i>
+                        <span class="d-none d-lg-inline-flex">Notifications</span>
+                       
+                    </a>
+                        
                         <?php 
                     }else{
                         
                         ?>
-                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
-                        <i class="fa fa-bell me-lg-2">
-                        </i>
-                        <span class="d-none d-lg-inline-flex">notifications</span>
+                          <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2 position-relative">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute top-0 start-0 p-1"></div>
+                            </i>
+                            <span class="d-none d-lg-inline-flex">Notifications</span>
+                           
+                        </a>
                        
-                    </a>
                      <?php
                      
                     }?>
@@ -166,7 +168,7 @@ include("php/query.php");
                              }
 ?>
                             <?php
-    if ((empty($resultHospitalData) && empty(resultParentData)) ) {
+    if ((empty($resultHospitalData) && empty($resultParentData)) ) {
         ?>
         <a class="dropdown-item text-center link-secondary">No notification</a>
     <?php
@@ -176,6 +178,8 @@ include("php/query.php");
     <?php
     }
     ?>
+                            <hr class="dropdown-divider">
+
                         </div>
                     </div>
 

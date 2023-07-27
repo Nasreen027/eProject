@@ -78,7 +78,23 @@ include('header.php')
 
 
                                 <?php
-                        };
+                        }if(empty($result)){
+                            ?>
+                               <tr>
+                                
+                                <td class
+                                ="d-flex justify-content-center p-5">
+                                <div >    
+                                    <i class="fa fa-bell fa-5x"></i>
+<p>
+No Notifications
+
+</p>
+                                </div>
+                                </td>
+                               </tr>
+                            <?php
+                        }
 
                                        ?>
                             </tbody>

@@ -33,7 +33,7 @@ include('header.php')
                         foreach($result as $row){
                         ?>
                                 <tr class="tr-row">
-                                    <th scope="row">
+                                    <th scope="row" class="id-column">
                                         <?php echo $row['parentID'] ?>
                                     </th>
 
