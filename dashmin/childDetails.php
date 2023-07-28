@@ -1,6 +1,12 @@
 <?php
 include('header.php')
 ?>
+
+<!---------------------------
+|
+|ALL details of child page
+|
+---------------------------->
 <div class="container pt-4">
     <div class="bg-light rounded p-4">
         <div class="row">
@@ -10,9 +16,10 @@ include('header.php')
 
                         <h4> Details of child</h4>
 
-<form method="post" >
-        <button class="btn bg-white text-black mb-2" name ="sort-by-vaccination-date">Sort by vaccination date</button>
-        </form>
+                        <form method="post">
+                            <button class="btn bg-white text-black mb-2" name="sort-by-vaccination-date">Sort by
+                                vaccination date</button>
+                        </form>
                     </div>
                     <div class="table-responsive bg- ">
                         <table class="table">
@@ -25,8 +32,8 @@ include('header.php')
                                     <td>Age</td>
                                     <td>Hospital Booked </td>
                                     <td>Vaccine </td>
-                                    <td>Medical Conditions </td>
                                     <td>Parent Name </td>
+                                    <td>Appointment </td>
                                     <td>Date of Vaccination </td>
 
                                 </tr>
@@ -54,7 +61,7 @@ if (isset($_POST['sort-by-vaccination-date'])) {
     INNER JOIN parent_login ON children_details.parentID = parent_login.parentID
     INNER JOIN vaccine_details ON children_details.vaccineID = vaccine_details.vaccineID
     INNER JOIN hospital_login ON children_details.hospitalID = hospital_login.hospitalID
-    ORDER BY children_details.childID ASC;");
+    ORDER BY children_details.childID ASC");
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
 }
                         foreach($result as $row){
@@ -79,11 +86,12 @@ if (isset($_POST['sort-by-vaccination-date'])) {
                                     <td>
                                         <?php echo $row['vaccineName'] ?>
                                     </td>
-                                    <td>
-                                        <?php echo $row['medicalConditions'] ?>
-                                    </td>
+
                                     <td>
                                         <?php echo $row['parentName'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['appointementStatus'] ?>
                                     </td>
                                     <td>
                                         <?php echo $row['vaccinationDate'] ?>

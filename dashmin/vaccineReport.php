@@ -22,7 +22,6 @@ include('header.php')
 
                                     <td>Vaccine Name</td>
                                     <td>Vaccine Stock</td>
-                                    <td>Vaccine Date</td>
                                     <td>Hospital Name </td>
                                     
 
@@ -46,9 +45,7 @@ include('header.php')
                                     <td>
                                         <?php echo $row['vaccineStock'] ?>
                                     </td>
-                                    <td>
-                                        <?php echo $row['vaccineDate'] ?>
-                                    </td>
+                                   
                                     <td>
                                         <?php echo $row['hospitalName'] ?>
                                     </td>
