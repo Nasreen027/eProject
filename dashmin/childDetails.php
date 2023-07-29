@@ -1,6 +1,12 @@
 <?php
 include('header.php')
 ?>
+
+<!---------------------------
+|
+|ALL details of child page
+|
+---------------------------->
 <div class="container pt-4">
     <div class="bg-light rounded p-4">
         <div class="row">
@@ -10,9 +16,10 @@ include('header.php')
 
                         <h4> Details of child</h4>
 
-
-
-
+                        <form method="post">
+                            <button class="btn bg-white text-black mb-2" name="sort-by-vaccination-date">Sort by
+                                vaccination date</button>
+                        </form>
                     </div>
                     <div class="table-responsive bg- ">
                         <table class="table">
@@ -25,20 +32,41 @@ include('header.php')
                                     <td>Age</td>
                                     <td>Hospital Booked </td>
                                     <td>Vaccine </td>
-                                    <td>Medical Conditions </td>
                                     <td>Parent Name </td>
                                     <td>Date of Vaccination </td>
+                                    <td>Appointment </td>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * from children_details JOIN parent_login on children_details.childID = parent_login.parentID join  vaccine_details on children_details.childID = vaccine_details.vaccineID  join  hospital_login on children_details.childID =  hospital_login.hospitalID ");
-                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-               
+                     function getSortedData($pdo)
+{
+    $query = $pdo->query("SELECT * FROM children_details 
+                          INNER JOIN parent_login ON children_details.parentID = parent_login.parentID 
+                          INNER JOIN vaccine_details ON children_details.vaccineID = vaccine_details.vaccineID 
+                          INNER JOIN hospital_login ON children_details.hospitalID = hospital_login.hospitalID 
+                          ORDER BY vaccinationDate ASC");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+// Check if the "Sort by vaccination date" button is clicked
+if (isset($_POST['sort-by-vaccination-date'])) {
+    $result = getSortedData($pdo);
+} else {
+    // By default, get data without sorting
+    $query = $pdo->query("SELECT *
+    FROM children_details
+    INNER JOIN parent_login ON children_details.parentID = parent_login.parentID
+    INNER JOIN vaccine_details ON children_details.vaccineID = vaccine_details.vaccineID
+    INNER JOIN hospital_login ON children_details.hospitalID = hospital_login.hospitalID
+    ORDER BY children_details.childID ASC");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+}
                         foreach($result as $row){
                         ?>
-                                <tr>
+                                <tr class="tr-row">
                                     <th scope="row">
                                         <?php echo $row['childID'] ?>
                                     </th>
@@ -58,15 +86,28 @@ include('header.php')
                                     <td>
                                         <?php echo $row['vaccineName'] ?>
                                     </td>
-                                    <td>
-                                        <?php echo $row['medicalConditions'] ?>
-                                    </td>
+
                                     <td>
                                         <?php echo $row['parentName'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['vaccineDate'] ?>
+                                        <?php echo $row['vaccinationDate'] ?>
                                     </td>
+                                    
+
+                                     <td class="d-flex">
+      <?php echo $row['appointmentStatus'] ?>
+      <div class="mx-auto">
+        <i class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"></i>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <form action="" method="post">
+            <input type="hidden" name="childID" value="<?php echo $row['childID'] ?>">
+            <button class="dropdown-item" name="childAppointmentApprove">Approve</button>
+            <button class="dropdown-item" name="childAppointmentReject" >Reject</button>
+          </form>
+        </div>
+      </div>
+    </td>
 
                                 </tr>
 
@@ -84,6 +125,7 @@ include('header.php')
         </div>
     </div>
 </div>
+<script src="js/script.js"></script>
 
 <?php
 include('footer.php')

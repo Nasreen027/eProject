@@ -22,7 +22,6 @@ include('header.php')
 
                                     <td>Vaccine Name</td>
                                     <td>Vaccine Stock</td>
-                                    <td>Vaccine Date</td>
                                     <td>Hospital Name </td>
                                     
 
@@ -30,12 +29,12 @@ include('header.php')
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * FROM vaccine_details JOIN  hospital_login on  vaccine_details.vaccineID = hospital_login.hospitalID ");
+                        $query = $pdo->query("SELECT * FROM vaccine_details JOIN  hospital_login on  vaccine_details.hospitalID = hospital_login.hospitalID ");
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                
                         foreach($result as $row){
                         ?>
-                                <tr>
+                                <tr class="tr-row">
                                     <th scope="row">
                                         <?php echo $row['vaccineID'] ?>
                                     </th>
@@ -46,9 +45,7 @@ include('header.php')
                                     <td>
                                         <?php echo $row['vaccineStock'] ?>
                                     </td>
-                                    <td>
-                                        <?php echo $row['vaccineDate'] ?>
-                                    </td>
+                                   
                                     <td>
                                         <?php echo $row['hospitalName'] ?>
                                     </td>
@@ -71,6 +68,7 @@ include('header.php')
         </div>
     </div>
 </div>
+<script src="js/script.js"></script>
 
 <?php
 include('footer.php')
