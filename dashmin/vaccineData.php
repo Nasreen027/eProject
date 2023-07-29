@@ -22,64 +22,40 @@ include('header.php')
                                 <tr>
                                     <th scope="col">#</th>
 
-                                    <th scope="col">Hospital Name</th>
-                                    <th scope="col">Hospital Email</th>
-                                    <th scope="col">Hospital Address</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Vaccine Name</th>
+                                    <th scope="col">Vaccine Stock</th>
+                                    <!-- <th scope="col">Hospital Address</th> -->
+                                    <!-- <th scope="col">Status</th> -->
                                     <th scope="col"> </th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                        $query = $pdo->query("SELECT * FROM hospital_login");
+                        $query = $pdo->query("SELECT * FROM vaccine_details");
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                
                         foreach($result as $row){
                         ?>
                                 <tr class="tr-row">
                                     <th scope="row">
-                                        <?php echo $row['hospitalID'] ?>
+                                        <?php echo $row['vaccineID'] ?>
                                     </th>
 
                                     <td>
-                                        <?php echo $row['hospitalName'] ?>
+                                        <?php echo $row['vaccineName'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['hospitalEmail'] ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['hospitalLocation'] ?>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <?php echo $row['hospitalStatus'] ?>
-                                            <div class="mx-auto">
-                                                <i class="fa fa-ellipsis-v" data-bs-toggle="dropdown"
-                                                    aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true"
-                                                    aria-expanded="false"></i>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <form action="" method="post">
-                                                        <input type="hidden" name="statusID"
-                                                            value="<?php echo $row['hospitalID'] ?>">
-                                                        <button class="dropdown-item"
-                                                            name="hospitalApprove">Approve</button>
-                                                        <button class="dropdown-item"
-                                                            name="hospitalReject">Reject</button>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        <?php echo $row['vaccineStock'] ?>
                                     </td>
                                     <td class="">
                                         <button class="btn btn-white edit-btn " data-bs-toggle="modal"
-                                            data-bs-target="#update-hospital-modal<?php echo $row['hospitalID']  ?>">
+                                            data-bs-target="#update-hospital-modal<?php echo $row['vaccineID']  ?>">
                                             <i class="fa fa-edit"></i>
                                         </button>
 
                                         <button class="btn btn-white" data-bs-toggle="modal"
-                                            data-bs-target="#delete-hospital-modal<?php echo $row['hospitalID']  ?>">
+                                            data-bs-target="#delete-hospital-modal<?php echo $row['vaccineID']  ?>">
                                             <i class="fa fa-trash"></i>
                                         </button>
 
@@ -91,7 +67,7 @@ include('header.php')
                                         | [start]                                         |
                                         |                                                 |      
                                         -------------------------------------------------->
-                                <div class="modal" id="update-hospital-modal<?php echo $row['hospitalID'] ?>">
+                                <div class="modal" id="update-hospital-modal<?php echo $row['vaccineID'] ?>">
                                     <div class="modal-dialog modal-xl bg-light ">
                                         <div class="modal-content bg-light">
                                             <div class="modal-header">
@@ -108,38 +84,26 @@ include('header.php')
                                                         <label for="inputPassword"
                                                             class="col-sm-2 col-form-label">ID</label>
                                                         <div class="col-sm-10">
-                                                            <input value="<?php echo $row['hospitalID'] ?>" readonly
+                                                            <input value="<?php echo $row['vaccineID'] ?>" readonly
                                                                 class="form-control bg-white" name="model-id">
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label class="col-sm-2 col-form-label">Name</label>
                                                         <div class="col-sm-10">
-                                                            <input value="<?php echo $row['hospitalName'] ?>"
+                                                            <input value="<?php echo $row['vaccineName'] ?>"
                                                                 id="modal-category-name" name="model-name"
                                                                 class="form-control" type="text">
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
-                                                        <label class="col-sm-2 col-form-label">Email</label>
+                                                        <label class="col-sm-2 col-form-label">Stock</label>
                                                         <div class="col-sm-10">
-                                                            <input value="<?php echo $row['hospitalEmail'] ?>"
+                                                            <input value="<?php echo $row['vaccineStock'] ?>"
                                                                 id="modal-category-name" name="model-email"
                                                                 class="form-control" type="text">
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 row">
-                                                        <label class="col-sm-2 col-form-label">Adress</label>
-                                                        <div class="col-sm-10">
-                                                            <input value="<?php echo $row['hospitalLocation'] ?>"
-                                                                id="modal-category-name" name="model-location"
-                                                                class="form-control" type="text">
-                                                        </div>
-                                                    </div>
-
-
-
-
 
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
@@ -167,7 +131,7 @@ include('header.php')
                                         | [start]                                         |
                                         |                                                 |      
                                         -------------------------------------------------->
-                                <div class="modal " id="delete-hospital-modal<?php echo $row['hospitalID'] ?>">
+                                <div class="modal " id="delete-hospital-modal<?php echo $row['vaccineID'] ?>">
                                     <div class="modal-dialog modal-xl bg-light w-50">
                                         <div class="modal-content bg-light">
                                             <!-- <div class="modal-header">
@@ -181,9 +145,9 @@ include('header.php')
                                                     <div class="d-flex justify-centre">
                                                         <div>
                                                             <input type="hidden" name="hospital_id_delete"
-                                                                value="<?php echo $row['hospitalID']; ?>">
+                                                                value="<?php echo $row['vaccineID']; ?>">
                                                             <span class="text-bold">'
-                                                                <?php echo $row['hospitalName'] ?>'
+                                                                <?php echo $row['vaccineName'] ?>'
                                                             </span>
                                                             <span> will also delete from database. <span>
                                                                     <p>Are you sure you want to permanently delete this
