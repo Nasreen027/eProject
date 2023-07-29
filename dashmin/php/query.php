@@ -21,23 +21,12 @@ if(isset($_POST['update_hospital_info'])){
     $email = $_POST['model-email'];
     $location = $_POST['model-location'];
     $id= $_POST['model-id'];
-    // $p_image = $_FILES['model-image']['name'];
-    // $p_image_size = $_FILES['model-image']['size'];
-    // $p_image_tmp_name = $_FILES['model-image']['tmp_name'];
-    // $p_image_ext = pathinfo($p_image, PATHINFO_EXTENSION);
-    // $destination = "cozastoreimages/".$p_image;
-    // $destinationProductCozastore = "/cozastore-master/databaseImage/".$p_image;
-
-    // if($p_image_size <= 48000000){
-    // if($p_image_ext === 'jpg' || $p_image_ext === "png" || $p_image_ext === 'jpeg'|| $p_image_ext === "webp"  || $p_image_ext === "" || $p_image === ""){
-    //     if(move_uploaded_file($p_image_tmp_name,$destination)){
+    
             $query= $pdo -> prepare("update hospital_login set hospitalName = :name,hospitalEmail = :email ,hospitalLocation = :location where hospitalID = :_id");
-            // $query= $pdo -> prepare("update category set category_name = :name,category_image=:image where category_id = :_id");
             $query -> bindParam('name', $name);
             $query -> bindParam('email', $email);
             $query -> bindParam('location', $location);
             $query -> bindParam('_id', $id);
-            // $query -> bindParam('image', $p_image);
             $query -> execute();
             echo "<script>alert('hospital updated succesfully')</script>";
             header('Location: hospitalData.php');
@@ -45,32 +34,7 @@ if(isset($_POST['update_hospital_info'])){
     
         }
      
-    // }else{
-    //     echo "<script>alert('not valid extension')
-    //     location.assign('adminPanelProducts.php')
-    //     </script>";
-    // }
-    
-    // }else{
-    //     echo "file size is greater";
-    // }if($p_image_size == 0){
-    //     if($p_image_ext === '' || $p_image === ""   ){
-            
-    //             $query= $pdo -> prepare("update category set category_name = :name where category_id = :_id");
-    //             $query -> bindParam('name', $c_name);
-    //             $query -> bindParam('_id', $c_id);
-             
-    //             $query -> execute();
-    //             echo "<script>alert('your changes are saved !!')</script>";
-            
-        
-    //     }
-        
-    //     }
-    
-    
-    
-    // }
+  
 // ---------------------------------------------------------------------------|
 //                                                                            |                 
 //                                                                            |
@@ -93,19 +57,11 @@ if(isset($_POST['update_hospital_info'])){
         $hospital_name = $_POST['insert-hospital-name'];
         $hospital_email = $_POST['insert-hospital-email'];
         $hospital_location = $_POST['insert-hospital-location'];
-        // $p_image = $_FILES['categoryImage']['name'];
-        // $p_image_size = $_FILES['categoryImage']['size'];
-        // $p_image_tmp_name = $_FILES['categoryImage']['tmp_name'];
-        // $p_image_ext = pathinfo($p_image, PATHINFO_EXTENSION);
-        // $destination = "images/".$p_image;
-        // if($p_image_size <= 48000000){
-        // if($p_image_ext == 'jpg' || $p_image_ext == "png" || $p_image_ext== 'jpeg' || $p_image_ext== 'webp'){
-        //     if(move_uploaded_file($p_image_tmp_name,$destination)){
+       
                 $query= $pdo -> prepare("INSERT into hospital_login(hospitalName,hospitalEmail,hospitalLocation) values(:hospital_name,:hospital_email,:hospital_location)");
                 $query -> bindParam('hospital_name', $hospital_name);
                 $query -> bindParam('hospital_email', $hospital_email);
                 $query -> bindParam('hospital_location', $hospital_location);
-                // $query -> bindParam('p_image', $p_image);
                 $query -> execute();
                
                 echo "<script>alert('hospital added succesfully')</script>";
@@ -114,19 +70,7 @@ if(isset($_POST['update_hospital_info'])){
         
             }
         
-        // }else{
-        //     echo "<script>alert('not valid extension')
-        //     location.assign('category.php')
-        //     </script>";
-        // }
-        
-        // }else{
-        //     echo "file size is greater";
-        // }
-        
-        
-        
-        // }
+       
 // ---------------------------------------------------------------------------|
 //                                                                            |                 
 //                                                                            |
@@ -239,11 +183,52 @@ if (isset($_POST['hospitalReject'])) {
 //     [end]     //
 
 ?>
-<!---------------------------------------------------------------------------------------------
+<!----------------------------------------------------------------------------------------------
 |   query for status column of hospital table                                                  |
 |   [end]..                                                                                    |  
 ----------------------------------------------------------------------------------------------->
+
+<!-----------------------------------------------------------------------------------------------
+|   query for appointment status column of child table      (Registeration Approval)             |
+|   [start]..                                                                                    |  
+------------------------------------------------------------------------------------------------->
+
 <?php
+// set appointment status = approve in database table when it is approved by admin  [start]//
+
+if (isset($_POST['childAppointmentApprove'])) {
+    $id = $_POST['childID'];
+    $query = $pdo->prepare("UPDATE children_details SET appointmentStatus = 'approved' WHERE childID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+}
+
+//     [end]     //
+
+// set appointment status = reject in database table when it is rejected by admin  [start]//
+
+if (isset($_POST['childAppointmentReject'])) {
+    $id = $_POST['childID'];
+    $query = $pdo->prepare("UPDATE children_details SET appointmentStatus = 'rejected' WHERE childID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+}
+//     [end]     //
+
+?>
+<!---------------------------------------------------------------------------------------------
+|   query for appointment status column of child table                                         |
+|   [end]..                                                                                    |  
+----------------------------------------------------------------------------------------------->
+
+
+<!---------------------------------------------------------------------------------------------
+|   query for approve or reject registeration and appointment request in requestPage           |
+|   [start]..                                                                                  |  
+----------------------------------------------------------------------------------------------->
+<?php
+
+//approve parent registeration on notification page query [start]//
 if (isset($_POST['notification-parent-approve-btn'])) {
     $id = $_POST['notification-parent-id'];
     $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'approved' WHERE parentID = :_id");
@@ -252,6 +237,9 @@ if (isset($_POST['notification-parent-approve-btn'])) {
     header('Location: requestPage.php');
     exit;
 }
+//     [end]     //
+
+//reject parent registeration on notification page query [start]//
 if (isset($_POST['notification-parent-reject-btn'])) {
     $id = $_POST['notification-parent-id'];
     $query = $pdo->prepare("UPDATE parent_login SET parentStatus = 'rejected' WHERE parentID = :_id");
@@ -260,8 +248,9 @@ if (isset($_POST['notification-parent-reject-btn'])) {
     header('Location: requestPage.php');
     exit;
 }
-?>
-<?php
+//     [end]     //
+
+//apporve hospital  registeration on notification page query [start]//
 if (isset($_POST['notification-hospital-approve-btn'])) {
     $id = $_POST['notification-hospital-id'];
     $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'approved' WHERE hospitalID = :_id");
@@ -270,6 +259,9 @@ if (isset($_POST['notification-hospital-approve-btn'])) {
     header('Location: requestPage.php');
     exit;
 }
+//     [end]     //
+
+//reject hospital registeration on notification page query [start]//
 if (isset($_POST['notification-hospital-reject-btn'])) {
     $id = $_POST['notification-hospital-id'];
     $query = $pdo->prepare("UPDATE hospital_login SET hospitalStatus = 'rejected' WHERE hospitalID = :_id");
@@ -278,4 +270,32 @@ if (isset($_POST['notification-hospital-reject-btn'])) {
     header('Location: requestPage.php');
     exit;
 }
+//     [end]     //
+//apporve child  appointment on notification page query [start]//
+if (isset($_POST['child-appointment-approve-btn'])) {
+    $id = $_POST['child-appointment-id'];
+    $query = $pdo->prepare("UPDATE children_details SET appointmentStatus = 'approved' WHERE childID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
+}
+//     [end]     //
+
+//reject child  appointment on notification page query [start]//
+if (isset($_POST['child-appointment-reject-btn'])) {
+    $id = $_POST['child-appointment-id'];
+    $query = $pdo->prepare("UPDATE children_details SET appointmentStatus = 'rejected' WHERE childID = :_id");
+    $query->bindParam('_id', $id);
+    $query->execute();
+    header('Location: requestPage.php');
+    exit;
+}
+//     [end]     //
+
+
 ?>
+<!---------------------------------------------------------------------------------------------
+|   query for approve or reject registeration and appointment request in requestPage           |
+|   [end]..                                                                                    |  
+----------------------------------------------------------------------------------------------->

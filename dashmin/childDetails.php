@@ -33,8 +33,8 @@ include('header.php')
                                     <td>Hospital Booked </td>
                                     <td>Vaccine </td>
                                     <td>Parent Name </td>
-                                    <td>Appointment </td>
                                     <td>Date of Vaccination </td>
+                                    <td>Appointment </td>
 
                                 </tr>
                             </thead>
@@ -91,11 +91,23 @@ if (isset($_POST['sort-by-vaccination-date'])) {
                                         <?php echo $row['parentName'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $row['appointementStatus'] ?>
-                                    </td>
-                                    <td>
                                         <?php echo $row['vaccinationDate'] ?>
                                     </td>
+                                    
+
+                                     <td class="d-flex">
+      <?php echo $row['appointmentStatus'] ?>
+      <div class="mx-auto">
+        <i class="fa fa-ellipsis-v" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false"></i>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <form action="" method="post">
+            <input type="hidden" name="childID" value="<?php echo $row['childID'] ?>">
+            <button class="dropdown-item" name="childAppointmentApprove">Approve</button>
+            <button class="dropdown-item" name="childAppointmentReject" >Reject</button>
+          </form>
+        </div>
+      </div>
+    </td>
 
                                 </tr>
 

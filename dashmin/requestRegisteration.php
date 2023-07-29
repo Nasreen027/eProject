@@ -90,13 +90,12 @@
                                 <tr>
 
                                     <td class="d-flex justify-content-center p-5">
-                                        <div>
-                                            <i class="fa fa-bell fa-5x"></i>
+                                        
                                             <p>
-                                                No Notifications
+                                                No registeration requests
 
                                             </p>
-                                        </div>
+                                        
                                     </td>
                                 </tr>
                                 <?php

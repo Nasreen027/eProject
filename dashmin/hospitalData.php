@@ -130,19 +130,7 @@ include('header.php')
                 
                   
                   
-                    <!-- <div class="mb-3 mt-3 row form-group">
-                        <label for=""  class="col-sm-2 col-form-label">Change Image</label>
-                        <div class="col-sm-10">
-                        <input type="file" name="model-image"           class="form-control bg-dark" >
-                    </div>
-                    </div>
-                    <div class="mb-3 row form-group">
-                        <label for="" class="col-sm-2 col-form-label">Category Image</label>
-                        <div class="col-sm-10" ><img  width="50%" id="modal-category-image" 
-                        src="cozastoreimages/<?php echo $row['category_image']  ?>" alt="">
-                    </div> 
-         
-                </div>-->
+                  
                 <!-- Modal footer -->
                 <div class="modal-footer">
         <button type="submit" class="btn btn-dark text-white" name="update_hospital_info">

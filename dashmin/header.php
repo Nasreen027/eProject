@@ -108,7 +108,9 @@ include("php/query.php");
                          $resultParentData = $queryParentData->fetchAll(PDO::FETCH_ASSOC);
                          $queryHospitalData = $pdo->query("SELECT * from hospital_login where hospitalStatus = 'pending'  LIMIT 2");
                          $resultHospitalData = $queryHospitalData->fetchAll(PDO::FETCH_ASSOC);
-                         if(empty($resultParentData) && empty($resultHospitalData) ){
+                         $queryAppointment = $pdo->query("SELECT * from children_details where appointmentStatus = 'pending'  LIMIT 1");
+                         $resultAppointment = $queryAppointment->fetchAll(PDO::FETCH_ASSOC);
+                         if(empty($resultParentData) && empty($resultHospitalData)&& empty($resultAppointment) ){
                           ?>
                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">
                         <i class="fa fa-bell me-lg-2">
@@ -150,7 +152,19 @@ include("php/query.php");
                              }
 ?>
                             <?php
-                          
+                            
+                    
+                             foreach($resultAppointment as $row){
+                       ?>
+                            <a href="childDetails.php" class="dropdown-item link-secondary">
+
+                                        <h6 class="fw-normal mb-0">
+                                            <?php echo ucfirst($row['childName'])?> has requested for registeration
+                                        </h6>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <?php
+                             }                         
                     
                              foreach($resultHospitalData as $row2){
                        ?>
@@ -168,7 +182,7 @@ include("php/query.php");
                              }
 ?>
                             <?php
-    if ((empty($resultHospitalData) && empty($resultParentData)) ) {
+    if (empty($resultHospitalData) && empty($resultParentData)  && empty($resultAppointment) ) {
         ?>
         <a class="dropdown-item text-center link-secondary">No notification</a>
     <?php

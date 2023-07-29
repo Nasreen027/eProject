@@ -37,13 +37,13 @@
                                             </a>
                                         </span>
                                         <form method="post">
-                                            <input type="hidden" name="notification-parent-id"
-                                                value="<?php echo $row['parentID']?>">
+                                            <input type="hidden" name="child-appointment-id"
+                                                value="<?php echo $row['childID']?>">
                                             <button class="approve-btn btn btn-secondary"
-                                                name='notification-parent-approve-btn'
+                                                name='child-appointment-approve-btn'
                                                 onclick="animateRow(this)">Approve</button>
                                             <button class="reject-btn btn btn-light"
-                                                name='notification-parent-reject-btn'
+                                                name='child-appointment-reject-btn'
                                                 onclick="rejectRow(this)">Reject</button>
                                         </form>
 
@@ -61,13 +61,12 @@
                                 <tr>
 
                                     <td class="d-flex justify-content-center p-5">
-                                        <div>
-                                            <i class="fa fa-bell fa-5x"></i>
+                                    
                                             <p>
-                                                No Notifications
+                                                No appointment requests
 
                                             </p>
-                                        </div>
+                                       
                                     </td>
                                 </tr>
                                 <?php
