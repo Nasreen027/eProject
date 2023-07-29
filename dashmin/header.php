@@ -39,6 +39,21 @@ include("php/query.php");
     h4 {
         color: #6C7293;
     }
+    /* Replace "fa-eye" with the actual class name for the eye icon you are using (e.g., Font Awesome) */
+.fa-eye {
+    cursor: pointer;
+    position: absolute;
+    top: 62%;
+    right: 25px;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+/* Optional: To style the eye icon when the password is visible */
+.fa-eye.visible {
+    color: #007bff; /* Change this color to your preferred color */
+}
+
 </style>
 
 <body>

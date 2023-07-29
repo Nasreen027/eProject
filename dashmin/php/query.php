@@ -57,11 +57,13 @@ if(isset($_POST['update_hospital_info'])){
         $hospital_name = $_POST['insert-hospital-name'];
         $hospital_email = $_POST['insert-hospital-email'];
         $hospital_location = $_POST['insert-hospital-location'];
+        $hospital_password = $_POST['insert-hospital-password'];
        
-                $query= $pdo -> prepare("INSERT into hospital_login(hospitalName,hospitalEmail,hospitalLocation) values(:hospital_name,:hospital_email,:hospital_location)");
+                $query= $pdo -> prepare("INSERT into hospital_login(hospitalName,hospitalEmail,hospitalLocation,hospitalPassword) values(:hospital_name,:hospital_email,:hospital_location,:hospital_password)");
                 $query -> bindParam('hospital_name', $hospital_name);
                 $query -> bindParam('hospital_email', $hospital_email);
                 $query -> bindParam('hospital_location', $hospital_location);
+                $query -> bindParam('hospital_password', $hospital_password);
                 $query -> execute();
                
                 echo "<script>alert('hospital added succesfully')</script>";
