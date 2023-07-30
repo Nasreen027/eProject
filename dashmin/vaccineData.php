@@ -11,7 +11,7 @@ include('header.php')
                         <h4>Vaccines</h4>
 
                         <button type="button" class="btn text-dark  bg-white mb-2 insert" data-bs-toggle="modal"
-                            data-bs-target="#insert-hospital-modal" name="insertCategory">Add Vaccine
+                            data-bs-target="#insert-vaccine-modal" name="insertCategory">Add Vaccine
                         </button>
 
 
@@ -50,12 +50,12 @@ include('header.php')
                                     </td>
                                     <td class="">
                                         <button class="btn btn-white edit-btn " data-bs-toggle="modal"
-                                            data-bs-target="#update-hospital-modal<?php echo $row['vaccineID']  ?>">
+                                            data-bs-target="#update-vaccine-modal<?php echo $row['vaccineID']  ?>">
                                             <i class="fa fa-edit"></i>
                                         </button>
 
                                         <button class="btn btn-white" data-bs-toggle="modal"
-                                            data-bs-target="#delete-hospital-modal<?php echo $row['vaccineID']  ?>">
+                                            data-bs-target="#delete-vaccine-modal<?php echo $row['vaccineID']  ?>">
                                             <i class="fa fa-trash"></i>
                                         </button>
 
@@ -67,7 +67,7 @@ include('header.php')
                                         | [start]                                         |
                                         |                                                 |      
                                         -------------------------------------------------->
-                                <div class="modal" id="update-hospital-modal<?php echo $row['vaccineID'] ?>">
+                                <div class="modal" id="update-vaccine-modal<?php echo $row['vaccineID'] ?>">
                                     <div class="modal-dialog modal-xl bg-light ">
                                         <div class="modal-content bg-light">
                                             <div class="modal-header">
@@ -85,14 +85,14 @@ include('header.php')
                                                             class="col-sm-2 col-form-label">ID</label>
                                                         <div class="col-sm-10">
                                                             <input value="<?php echo $row['vaccineID'] ?>" readonly
-                                                                class="form-control bg-white" name="model-id">
+                                                                class="form-control bg-white" name="model-vaccine-id">
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label class="col-sm-2 col-form-label">Name</label>
                                                         <div class="col-sm-10">
                                                             <input value="<?php echo $row['vaccineName'] ?>"
-                                                                id="modal-category-name" name="model-name"
+                                                                id="modal-category-name" name="model-vaccine-name"
                                                                 class="form-control" type="text">
                                                         </div>
                                                     </div>
@@ -100,7 +100,7 @@ include('header.php')
                                                         <label class="col-sm-2 col-form-label">Stock</label>
                                                         <div class="col-sm-10">
                                                             <input value="<?php echo $row['vaccineStock'] ?>"
-                                                                id="modal-category-name" name="model-email"
+                                                                id="modal-category-name" name="model-vaccine-stock"
                                                                 class="form-control" type="text">
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@ include('header.php')
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-dark text-white"
-                                                            name="update_hospital_info">
+                                                            name="update_vaccine_info">
                                                             Update</button>
                                                         <button type="button" class="btn btn-danger"
                                                             data-bs-dismiss="modal">Close</button>
@@ -131,7 +131,7 @@ include('header.php')
                                         | [start]                                         |
                                         |                                                 |      
                                         -------------------------------------------------->
-                                <div class="modal " id="delete-hospital-modal<?php echo $row['vaccineID'] ?>">
+                                <div class="modal " id="delete-vaccine-modal<?php echo $row['vaccineID'] ?>">
                                     <div class="modal-dialog modal-xl bg-light w-50">
                                         <div class="modal-content bg-light">
                                             <!-- <div class="modal-header">
@@ -144,7 +144,7 @@ include('header.php')
                                                 <form method="post">
                                                     <div class="d-flex justify-centre">
                                                         <div>
-                                                            <input type="hidden" name="hospital_id_delete"
+                                                            <input type="hidden" name="vaccine_id_delete"
                                                                 value="<?php echo $row['vaccineID']; ?>">
                                                             <span class="text-bold">'
                                                                 <?php echo $row['vaccineName'] ?>'
@@ -158,7 +158,7 @@ include('header.php')
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-dark text-white"
-                                                            name="delete_hospital_info">
+                                                            name="delete_vaccine_info">
                                                             Yes</button>
                                                         <button type="button" class="btn btn-danger"
                                                             data-bs-dismiss="modal">No</button>
@@ -195,11 +195,11 @@ include('header.php')
                                         | [start]                                         |
                                         |                                                 |      
                                         -------------------------------------------------->
-<div class="modal" id="insert-hospital-modal">
+<div class="modal" id="insert-vaccine-modal">
     <div class="modal-dialog modal-xl bg-white">
         <div class="modal-content bg-white">
             <div class="modal-header">
-                <h4 class="modal-title">Add Hospital</h4>
+                <h4 class="modal-title">Add Vaccine</h4>
                 <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -208,34 +208,18 @@ include('header.php')
 
                     <div class="mb-3 row form-group">
                         <label for="" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10"> <input placeholder="Enter hospital name.." class="form-control bg-white"
-                                name="insert-hospital-name"></div>
+                        <div class="col-sm-10"> <input placeholder="Enter vaccine name.." class="form-control bg-white"
+                                name="insert-vaccine-name"></div>
                     </div>
                     <div class="mb-3 row form-group">
-                        <label for="" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10"> <input placeholder="Enter hospital email.."
-                                class="form-control bg-white" name="insert-hospital-email"></div>
+                        <label for="" class="col-sm-2 col-form-label">Stock</label>
+                        <div class="col-sm-10"> <input placeholder="Enter vaccine stock.."
+                                class="form-control bg-white" name="insert-vaccine-stock"></div>
                     </div>
-                    <div class="mb-3 row form-group">
-                        <label for="" class="col-sm-2 col-form-label">Location</label>
-                        <div class="col-sm-10"> <input placeholder="Enter hospital location.."
-                                class="form-control bg-white" name="insert-hospital-location"></div>
-                    </div>
-                    <div class="mb-3 row form-group">
-    <label for="" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-        <input type="password" placeholder="Enter password.." class="form-control password-input bg-white" name="insert-hospital-password" >
-        <span class="toggle-password" onclick="togglePasswordVisibility()">
-            <i class="fa fa-eye" ></i>
-        </span>
-    </div>
-</div>
-
-                  
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" name="insert-hospital-btn" class="btn btn-dark text-white">Add</button>
+                        <button type="submit" name="insert-vaccine-btn" class="btn btn-dark text-white">Add</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>

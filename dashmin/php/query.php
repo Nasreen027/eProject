@@ -16,20 +16,20 @@ include("connection.php");
 //                                                                            |
 //                                                                            |
 // ---------------------------------------------------------------------------|
-if(isset($_POST['update_hospital_info'])){
-    $name = $_POST['model-name'];
-    $email = $_POST['model-email'];
-    $location = $_POST['model-location'];
-    $id= $_POST['model-id'];
+if(isset($_POST['update_vaccine_info'])){
+    $vaccineName = $_POST['model-vaccine-name'];
+    $vaccineStock = $_POST['model-vaccine-stock'];
+    // $location = $_POST['model-location'];
+    $vaccineId= $_POST['model-vaccine-id'];
     
-            $query= $pdo -> prepare("update hospital_login set hospitalName = :name,hospitalEmail = :email ,hospitalLocation = :location where hospitalID = :_id");
-            $query -> bindParam('name', $name);
-            $query -> bindParam('email', $email);
-            $query -> bindParam('location', $location);
-            $query -> bindParam('_id', $id);
+            $query= $pdo -> prepare("update vaccine_details set vaccineName = :name,vaccineStock = :stock where vaccineID = :_id");
+            $query -> bindParam('name', $vaccineName);
+            $query -> bindParam('stock', $vaccineStock);
+            // $query -> bindParam('location', $location);
+            $query -> bindParam('_id', $vaccineId);
             $query -> execute();
-            echo "<script>alert('hospital updated succesfully')</script>";
-            header('Location: hospitalData.php');
+            echo "<script>alert('Vaccine updated succesfully')</script>";
+            header('Location: vaccineData.php');
             exit;
     
         }
@@ -53,21 +53,21 @@ if(isset($_POST['update_hospital_info'])){
 //                                                                            |
 //                                                                            |
 // ---------------------------------------------------------------------------|
-    if(isset($_POST['insert-hospital-btn'])){
-        $hospital_name = $_POST['insert-hospital-name'];
-        $hospital_email = $_POST['insert-hospital-email'];
-        $hospital_location = $_POST['insert-hospital-location'];
-        $hospital_password = $_POST['insert-hospital-password'];
+    if(isset($_POST['insert-vaccine-btn'])){
+        $vaccine_name = $_POST['insert-vaccine-name'];
+        $vaccine_stock = $_POST['insert-vaccine-stock'];
+        // $hospital_location = $_POST['insert-hospital-location'];
+        // $hospital_password = $_POST['insert-hospital-password'];
        
-                $query= $pdo -> prepare("INSERT into hospital_login(hospitalName,hospitalEmail,hospitalLocation,hospitalPassword) values(:hospital_name,:hospital_email,:hospital_location,:hospital_password)");
-                $query -> bindParam('hospital_name', $hospital_name);
-                $query -> bindParam('hospital_email', $hospital_email);
-                $query -> bindParam('hospital_location', $hospital_location);
-                $query -> bindParam('hospital_password', $hospital_password);
+                $query= $pdo -> prepare("INSERT into vaccine_details(vaccineName,vaccineStock) values(:vaccine_name,:vaccine_stock)");
+                $query -> bindParam('vaccine_name', $vaccine_name);
+                $query -> bindParam('vaccine_stock', $vaccine_stock);
+                // $query -> bindParam('hospital_location', $hospital_location);
+                // $query -> bindParam('hospital_password', $hospital_password);
                 $query -> execute();
                
-                echo "<script>alert('hospital added succesfully')</script>";
-                header('Location: hospitalData.php');
+                echo "<script>alert('Vaccine added succesfully')</script>";
+                header('Location: vaccineData.php');
                 exit;
         
             }
@@ -94,13 +94,13 @@ if(isset($_POST['update_hospital_info'])){
 // ---------------------------------------------------------------------------|
     
 
-if (isset($_POST['delete_hospital_info'])) {
-    $hospital_id = $_POST['hospital_id_delete'];
-    $query= $pdo -> prepare(" DELETE FROM hospital_login WHERE hospitalID = :id;");
-    $query->bindParam('id', $hospital_id);
+if (isset($_POST['delete_vaccine_info'])) {
+    $vaccine_id = $_POST['vaccine_id_delete'];
+    $query= $pdo -> prepare(" DELETE FROM vaccine_details WHERE vaccineID = :id;");
+    $query->bindParam('id', $vaccine_id);
     $query->execute();
-    echo "<script>alert('hospital deleted')</script>";
-    header('Location: hospitalData.php');
+    echo "<script>alert('Vaccine deleted')</script>";
+    header('Location: vaccineData.php');
     exit;
     
 };
