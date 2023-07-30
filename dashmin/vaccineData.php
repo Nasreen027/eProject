@@ -8,10 +8,10 @@ include('header.php')
                 <div class="bg-white rounded h-100 ">
                     <div class="d-flex bg-light justify-content-between">
 
-                        <h4>Hospital Data</h4>
+                        <h4>Vaccines</h4>
 
                         <button type="button" class="btn text-dark  bg-white mb-2 insert" data-bs-toggle="modal"
-                            data-bs-target="#insert-hospital-modal" name="insertCategory">Add hospital
+                            data-bs-target="#insert-hospital-modal" name="insertCategory">Add Vaccine
                         </button>
 
 
@@ -253,19 +253,19 @@ include('header.php')
 
 <script src="js/script.js"></script>
 <script>
-     function togglePasswordVisibility() {
-        const passwordInput = document.querySelector('.password-input');
-        const eyeIcon = document.querySelector('.toggle-password i');
+    //  function togglePasswordVisibility() {
+    //     const passwordInput = document.querySelector('.password-input');
+    //     const eyeIcon = document.querySelector('.toggle-password i');
 
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            eyeIcon.classList.add('visible');
-        } else {
-            passwordInput.type = 'password';
-            eyeIcon.classList.remove('visible');
-        }
-        // alert('hello');
-    }
+    //     if (passwordInput.type === 'password') {
+    //         passwordInput.type = 'text';
+    //         eyeIcon.classList.add('visible');
+    //     } else {
+    //         passwordInput.type = 'password';
+    //         eyeIcon.classList.remove('visible');
+    //     }
+    //     // alert('hello');
+    // }
 </script>
 <?php
 include('footer.php')
