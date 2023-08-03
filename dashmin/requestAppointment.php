@@ -30,7 +30,7 @@
 
                                     <td class="d-flex justify-content-around">
                                         <span class="flex-grow-1">
-                                            <a href="parentRequest.php" class="link-secondary">
+                                            <a href="childDetails.php" class="link-secondary">
 
                                                 <?php echo ucfirst($row['parentName'])?> has requested to book  ' <?php echo ucfirst($row['vaccineName'])?>' at '<?php echo ucfirst($row['hospitalName'])?>' on <?php echo $row['vaccinationDate']?>
 
