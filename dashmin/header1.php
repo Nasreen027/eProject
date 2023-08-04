@@ -90,7 +90,7 @@ include("php/query.php");
                     <a href="hospitalData.php" class="nav-item nav-link "><i class="fa fa-hospital me-2"></i>Hospital
                         Data</a>
                     <a href="vaccineReport.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vaccine
-                        Report</a>
+                        Details</a>
                         <a href="parentRequest.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Parent</a>
                         <a href="childDetails.php" class="nav-item nav-link"><i class="fa fa-child me-2"></i>Child
                         Details</a>
